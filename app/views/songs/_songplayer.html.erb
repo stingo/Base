@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+
+
+<style type="text/css">
+div#mp3_player{ width:638px; height:0px; background:#000; margin-top: 0px; }
+div#mp3_player > div > audio{  width:638px; background:#000; float:left;  }
+div#mp3_player > canvas{ width:638px; height:270px; background:#000000; opacity: 0.4; float:left; }
+</style>
+
+
+
+
+</head>
+<body>
+
+
+<div id="mp3_player">
+  <div id="audio_box"></div>
+  <canvas id="analyser_render"></canvas>
+</div>
+
+<script type="text/javascript">
+// Create a new instance of an audio object and adjust some of its properties
+var audio = new Audio();
+audio.src = '<%= @song.audio.url if @song.audio? %>';
+audio.controls = true;
+audio.loop = true;
+audio.autoplay = false;
+
+</script>
+
+
+</body>
+</html>

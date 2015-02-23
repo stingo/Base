@@ -1,0 +1,15 @@
+<%= form_for(User.new) do |f| %>
+  
+  
+
+  
+  <div class="field">
+    <%= f.label :add_profile_photo %><br>
+    <%= f.file_field :avatar %>
+  </div>
+  
+  
+  <button type="button" class="btn btn-primary">
+    <%= f.submit %>
+  </button>
+<% end %>

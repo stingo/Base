@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<script>
+var audio, playbtn;
+function initAudioPlayer(){
+    audio = new Audio();
+    audio.src = "images/player/TashaCobbs.mp3";
+    audio.loop = true;
+    audio.pause();
+
+
+    // Set object references
+    playbtn = document.getElementById("playpausebtn");
+    
+    // Add Event Handling
+    playbtn.addEventListener("click",playPause);
+   
+    // Functions
+    function playPause(){
+        if(audio.paused){
+            audio.play();
+            playbtn.style.background = "url(images/player/pause.png) no-repeat";
+        } else {
+            audio.pause();
+            playbtn.style.background = "url(images/player/play.png) no-repeat";
+        }
+    }
+    
+}
+window.addEventListener("load", initAudioPlayer);
+</script>
+</head>
+<body>
+<div class="centerplayer">
+<button id="playpausebtn"></button>
+</div>
+
+</body>
+</html>

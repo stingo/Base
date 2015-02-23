@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+
+
+</head>
+
+<body>
+
+
+
+<p id="notice"><%= notice %></p>
+<p></p>
+
+
+<div class="em-background-box centerfy" style="background-image: url('')">
+
+
+  
+  <%= image_tag @user.avatar.url(:thumb) if @user.avatar? %>
+  <p><%= @user.username %> | <%= @user.email %> </p>
+  www.preachout.com/<%= @user.email %>
+
+  
+
+</div>
+
+
+
+
+<p><%= link_to 'Edit', edit_user_path(current_user) %> </p>
+
+
+
+      
+
+</body>
+</html>
+
+

@@ -1,0 +1,233 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+
+
+</head>
+
+<body>
+
+
+
+<p id="notice"><%= notice %></p>
+<p></p>
+
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-5">
+        
+      
+        
+
+
+<div class="star-rating" data-score= <%= @avg_review %> ></div>
+        <em><%= "#{@reviews.length} reviews" %> </em>
+
+
+
+  
+  <%= link_to @song.artist %>  <strong>Country:</strong>
+  <%= @song.country %> <strong>Genre:</strong> <%= @song.genre %> <strong>Song type:</strong>  <%= @song.song_type %>
+</br>
+
+
+
+  <div class ="player-wrapmain" >
+
+    <div class = "maincounter"> 
+      <button type="button" class="btn btn-default btn-sm"> 
+     2,143,567 plays</button>
+  </div>
+
+
+  
+  <% if @song.cover? %>
+  <%= image_tag @song.cover.url(:thumb) %> 
+  <% else %>
+
+  <%= image_tag("fallback/default.png") %>
+
+  <% end %>
+
+
+
+
+
+
+<div class = "bigplayer">
+<%= render 'songplayer' %>
+</div>
+
+
+
+</div>
+
+<div>
+<button type="button" class="btn btn-info btn-sm"> 
+    <span class="glyphicon glyphicon-share" alt="Some descriptive text" title="I am an image" ></span> Preachout</button>
+
+
+  <button type="button" class="btn btn-default btn-sm"> 
+    <span class="glyphicon glyphicon-download"></span> Download</button>
+
+    <button type="button" class="btn btn-default btn-sm"> 
+    <span class="glyphicon glyphicon-retweet"></span> Repost</button>
+
+    <button type="button" class="btn btn-default btn-sm"> 
+    <span class="glyphicon glyphicon-shopping-cart"></span> Buy</button>
+
+
+<div class= "btn btn-default btn-xs" data-toggle="modal" data-target="#myModal">Sing along </div> 
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="font-size:13px;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Lyrics | <%= @song.title %></h4>
+      </div>
+      <div class="modal-body">
+        <%= render 'lyrics' %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+  
+  
+
+</div>
+
+</p>
+
+<div class="table-responsive">
+
+<table class="table">
+            <tbody>
+              <tr>
+                <td><%= @song.title %></td>
+                <td>Uploaded: <%= timeago_tag Time.zone.now, :nojs => true, :limit => 10.days.ago %></td>
+              </tr>
+              <tr>                
+                <td><%= @song.description %></td>
+              </tr>
+              <tr>
+                <td><strong>by:</strong></td>
+                <td><%= @song.user.email %></td>
+              </tr>
+              <tr>
+                <td><strong>Video embed:</strong></td>
+                <td><%= @song.video_embed %></td>
+              </tr>
+              <tr>
+                <td><strong>Lyrics:</strong></td>
+                <td><%= @song.lyrics %></td>
+              </tr>
+              <tr>
+                <td><strong>Release date:</strong></td>
+                <td><%= @song.release_date %></td>
+
+              </tr>
+              
+                
+            </tbody>
+          </table>
+
+
+           <em><strong>All Comments</strong></em>
+
+          <p><div class ="btn btn-danger"
+            <%= link_to "Write a Review", new_song_review_path(@song) %></p></div>
+
+
+
+
+
+
+
+<% if @reviews.blank? %>
+          <h3>No commentss just yet, would you like to add the first!</h3>
+          <%= link_to "Add comments and rating", new_song_review_path(@song), class: "btn btn-danger" %>
+        <% else %>
+          <% @reviews.each do |review| %>
+          <div class="reviews">
+              <div class="star-rating" data-score= <%= review.rating %> ></div>
+              <p><%= review.comment %></p>
+            </div>
+
+
+
+
+            
+          <% end %>
+          <% end %>
+
+<%= link_to 'Edit', edit_song_path %> |
+<%= link_to 'Back', songs_path %>
+
+        </div>
+        </div>
+
+
+  <div class="col-md-4 col-md-offset-2">
+        <h1 class="img-responsive">Related</h1>
+
+        <div class="img-responsive"><%= image_tag "related.png" %> </div>
+
+      
+
+
+<%= render 'video' %>
+
+
+
+    </div>
+      </div>
+      </div>
+      </div>
+
+      
+
+</body>
+</html>
+
+
+
+
+
+  <div role="tabpanel">
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">More info</a></li>
+    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Lyrics</a></li>
+    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Video</a></li>
+    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="home">...</div>
+    <div role="tabpanel" class="tab-pane" id="profile">...</div>
+    <div role="tabpanel" class="tab-pane" id="messages">...</div>
+    <div role="tabpanel" class="tab-pane" id="settings">...</div>
+  </div>
+
+</div>
+
+<script>
+    $('.star-rating').raty({
+      path: '/assets/',
+      readOnly: true,
+      score: function() {
+            return $(this).attr('data-score');
+    }
+  });
+</script>

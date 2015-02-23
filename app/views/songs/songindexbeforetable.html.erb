@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>African Music Base</title>
+<!--audio css-->
+
+<style type="text/css">
+
+
+button{ border:none; cursor:pointer; outline:none; }
+button#playpausebtn{
+  background:url(images/play.png) no-repeat;
+  width:20px;
+  height:20px;
+}
+button#mutebtn{
+  background:url(images/speaker.png) no-repeat;
+  width:5px;
+  height:14px;
+}
+
+
+
+</style>
+
+
+<!-- add styles and scripts -->
+    <link href="css/styles.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui-1.8.21.custom.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+
+    <%= stylesheet_link_tag "playerstyles", media: "all" %>
+    <%= javascript_include_tag "sub/main", "jquery-1.7.2.min", "jquery-ui-1.8.21.custom.min" %>
+
+
+</head>
+
+<body>
+
+  <div class="jumbotron centerfy">
+  <h1>African Music Base</h1>
+  <p>Free, easy and fun way to Share or promote African Music, Videos & Events..</p>
+  
+  <p><%= link_to "Get Started", new_user_registration_path, class: "btn btn-primary btn-lg" %> </p>
+</div>
+<br>
+
+
+<div class="example">
+
+        <div class="player">
+            <div class="pl"></div>
+            <div class="title"></div>
+            <div class="artist"></div>
+            <div class="cover"></div>
+            <div class="controls">
+                <div class="play"></div>
+                <div class="pause"></div>
+                <div class="rew"></div>
+                <div class="fwd"></div>
+            </div>
+            <div class="volume"></div>
+            <div class="tracker"></div>
+        </div>
+        <% @songs.each do |song| %>
+              <ul class="playlist hidden">
+                  <li audiourl="01.mp3" cover="cover1.jpg" artist="Artist 1">01.mp3</li>
+                  <li audiourl="02.mp3" cover="cover2.jpg" artist="Artist 2">02.mp3</li>
+                  <li audiourl="03.mp3" cover="cover3.jpg" artist="Artist 3">03.mp3</li>
+                  <li audiourl="04.mp3" cover="cover4.jpg" artist="Artist 4">04.mp3</li>
+                  <li audiourl="05.mp3" cover="cover5.jpg" artist="Artist 5">05.mp3</li>
+                  <li audiourl="06.mp3" cover="cover6.jpg" artist="Artist 6">06.mp3</li>
+                  <li audiourl="07.mp3" cover="cover7.jpg" artist="Artist 7">07.mp3</li>
+              </ul>
+        <% end %>
+
+    </div>
+
+
+
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-7">
+                <!--song thumbnail-->
+                <% @songs.each do |song| %>
+                    <div class="col-md-3">
+                      <% if song.cover? %>
+                        
+                        <%=link_to (image_tag song.cover.url(:front)), song %>
+
+                      <% else %>
+                        <%= image_tag("fallback/noimage.jpg") %>
+
+                        <% end %>
+                        <%= render 'inplayer' %>
+                    </div>
+    
+                <!--table column-->
+
+                   <div class="col-md-9">
+                    <table class="table-hover" style="width:100%">
+                        <tr>
+                          <td><%= song.artist %> <%= link_to song.title, song %> </td>
+                        </tr>
+                        <tr>
+                          <!--audio-->
+                            <td>
+                            <!--div id="mp3_player">
+                                <div id="audio_box"></div>
+                                    <canvas id="analyser_render"></canvas>
+                                </div>
+                              <audio controls> 
+                                <source src="<%= song.audio.url %>" type="audio/mpeg">
+                                  Your browser does not support the audio element.
+                                </audio-->
+                            </td>
+                          <!--end-->
+                        </tr>
+                        <tr>
+                            <td> 
+                            <button type="button" class="btn btn-default btn-sm"> 
+                                  <span class="glyphicon glyphicon-retweet"></span>
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm"> 
+                            <span class="glyphicon glyphicon-download"></span></button>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <hr>
+
+                </div>
+     
+                <% end %>
+
+          <!--end of table-->
+
+            </div>
+          <!--related feeds-->
+          <div class="col-md-5"><%= image_tag "related.png" %></div>
+        </div>
+      <br>
+          <% @songs.each do |song| %>
+                <%= link_to 'New Song', new_song_path %>
+                <%= link_to 'Edit', edit_song_path(song) %> |
+                <%= link_to 'Destroy', song, method: :delete, data: { confirm: 'Are you sure?' } %>|
+                <%= link_to 'Back', songs_path %>
+          <% end %>
+      </div>
+</div>
+
+<% @songs.each do |song| %>
+      <script type="text/javascript">
+          // Create a new instance of an audio object and adjust some of its properties
+          //var audio = new Audio();
+          //audio.src = '<%= song.audio.url if song.audio? %>';
+          //audio.controls = false;
+          //audio.loop = true;
+          //audio.autoplay = false;
+      </script>
+<% end %>
+
+</body>
+
+
+
+    <footer>
+          <div class="player-wrap pindown centerfy">
+            <%= render 'footerplayer' unless @disable_player %>  
+          </div>   
+    </footer>
+
+</html>
+
