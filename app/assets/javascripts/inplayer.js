@@ -1,4 +1,4 @@
-<script>
+/**<script>
 var audio, playbtn;
 function initAudioPlayer(){
    

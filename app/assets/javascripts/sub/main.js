@@ -8,7 +8,7 @@
  * Copyright 2012, Script Tutorials
  * http://www.script-tutorials.com/
  */
-jQuery(document).ready(function() {
+/**jQuery(document).ready(function() {
 
     // inner variables
     var song;
@@ -16,7 +16,7 @@ jQuery(document).ready(function() {
     var volume = $('.volume');
 
     function initAudio(elem) {
-        var url = elem.attr('audiourl');
+        var url = elem.attr('songpath');
         var title = elem.text();
         var cover = elem.attr('cover');
         var artist = elem.attr('artist');
@@ -25,7 +25,7 @@ jQuery(document).ready(function() {
         $('.player .artist').text(artist);
         $('.player .cover').css('background-image','url(../images/data/' + cover+')');;
 
-        song = new Audio('../images/data/' + url);
+        song = new Audio(url);
 
         // timeupdate event listener
         song.addEventListener('timeupdate',function (){
@@ -134,3 +134,4 @@ jQuery(document).ready(function() {
         stop: function(event,ui) {}
     });
 });
+*/

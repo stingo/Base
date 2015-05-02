@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>African Music Base</title>
+<!--audio css-->
+
+<style>
+body{ background:#666; }
+button{ border:none; cursor:pointer; outline:none; }
+button#playpausebtn{
+    background:url(images/play.png) no-repeat;
+    width:58px;
+    height:56px;
+}
+</style>
+
+
+<!-- add styles and scripts -->
+    <%= javascript_include_tag :all %>
+     <%= javascript_include_tag 'inplayer', 'data-turbolinks-track' => true %>
+    
+    <%= javascript_include_tag 'amazing/main', "amazingaudioplayer", "initaudioplayer-1" "jquery" %>
+    <%= javascript_include_tag "sub/main", "jquery-1.7.2.min", "jquery-ui-1.8.21.custom.min" %>
+    
+
+    <%= stylesheet_link_tag "initaudioplayer-1.css", media: "all" %>
+    
+
+
+
+</head>
+
+<body>
+
+  <div class="jumbotron centerfy">
+
+
+    <div class="player">
+            <div class="pl"></div>
+            <div class="title"></div>
+            <div class="artist"></div>
+            <div class="cover"></div>
+            <div class="controls">
+                <div class="play"></div>
+                <div class="pause"></div>
+                <div class="rew"></div>
+                <div class="fwd"></div>
+            </div>
+            <div class="volume"></div>
+            <div class="tracker"></div>
+        </div>
+        <% @songs.reverse_each do |song| %>
+              <ul class="playlist hidden">
+                  <li audiourl="01.mp3" cover="cover1.jpg" artist="Artist 1">01.mp3</li>
+                  <li audiourl="02.mp3" cover="cover2.jpg" artist="Artist 2">02.mp3</li>      
+              </ul>
+        <% end %> 
+
+    </div>
+
+
+    
+    <!-- End of body section HTML codes -->
+
+</div>  
+  <!--h1>African Music Base</h1>
+  <p>Free, easy and fun way to Share or promote African Music, Videos & Events..</p>
+  
+  <p><link_to "Get Started", new_user_registration_path, class: "btn btn-primary btn-lg" > </p-->
+
+
+
+</div>
+<br>
+
+
+
+
+
+
+
+<!--div class="example">
+
+        <div class="player">
+            <div class="pl"></div>
+            <div class="title"></div>
+            <div class="artist"></div>
+            <div class="cover"></div>
+            <div class="controls">
+                <div class="play"></div>
+                <div class="pause"></div>
+                <div class="rew"></div>
+                <div class="fwd"></div>
+            </div>
+            <div class="volume"></div>
+            <div class="tracker"></div>
+        </div>
+        @songs.each ddo |song| %>
+              <ul class="playlist hidden">
+                  <li audiourl="01.mp3" cover="cover1.jpg" artist="Artist 1">01.mp3</li>
+                  <li audiourl="02.mp3" cover="cover2.jpg" artist="Artist 2">02.mp3</li>
+                  <li audiourl="03.mp3" cover="cover3.jpg" artist="Artist 3">03.mp3</li>
+                  <li audiourl="04.mp3" cover="cover4.jpg" artist="Artist 4">04.mp3</li>
+                  <li audiourl="05.mp3" cover="cover5.jpg" artist="Artist 5">05.mp3</li>
+                  <li audiourl="06.mp3" cover="cover6.jpg" artist="Artist 6">06.mp3</li>
+                  <li audiourl="07.mp3" cover="cover7.jpg" artist="Artist 7">07.mp3</li>
+              </ul>
+        ennd 
+
+    </div-->
+
+
+
+
+
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="row">
+
+          <div class="col-md-7">
+
+
+            
+
+
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped table-hover ">
+
+              <% @songs.reverse_each do |song| %>
+
+
+    
+    <tr >
+     
+      <td>
+
+        <% if song.cover? %>
+                        
+                        <%=link_to (image_tag song.cover.url(:front)), song %>
+
+                      <% else %>
+                        <%= image_tag("fallback/noimage.jpg") %>
+
+
+
+                        
+                        <% end %>
+
+
+        </td>
+      
+
+      <td align="left">
+
+        
+              
+          
+       <div class="centerplayer">
+        <button id="playpausebtn"></button>
+
+        
+        
+
+
+</div>
+
+
+
+
+          
+
+ 
+          
+          <!---<input type= "button" value= "Count" id= "countButton" />
+          <p>yes<span id= "displayCount">0</span>plays. </p>
+          <button type="button" class="btn btn-info btn-xs">23,779</button>-->              
+        </td>
+     
+      <td class="" align="left" >     
+       <%= link_to song.title, song %>
+       </br>
+       <%= song.artist %>
+     </br>
+     </br>
+     <span class="glyphicon glyphicon-thumbs-up"></span>Like  <span class="glyphicon glyphicon-download-alt"></span>Download  <span class="glyphicon glyphicon-retweet"></span>Repost  <span class="glyphicon glyphicon-list"></span>
+      </td>
+        
+        <td ><button type="button" class="btn btn-default btn-sm"> 
+                                  <span class="glyphicon glyphicon-share btn btn-warning btn-xs"></span>
+                            </button><span>24,755</span></td>
+
+
+        
+
+    </tr>
+    <% end %>
+    
+
+  </table>
+</div>
+
+  
+<!--script for individual player starts here-->
+
+
+   <%= render 'player' %>     
+
+ <!--script for analyzer starts here-->
+
+<script>
+// Create a new instance of an audio object and adjust some of its properties
+var audio = new Audio();
+audio.src = '';
+
+audio.loop = true;
+audio.autoplay = false;
+
+// Establish all variables that your Analyser will use
+var canvas, solo, ctx, source, context, analyser, fbc_array, bars, bar_x, bar_width, bar_height;
+// Initialize the MP3 player after the page loads all of its HTML into the window
+window.addEventListener("load", initMp3Player, false);
+function initMp3Player(){
+    document.getElementById('audio_box').appendChild(audio);
+    context = new webkitAudioContext(); // AudioContext object instance
+    solo = document.getElementById('solo_render');
+    analyser = context.createAnalyser(); // AnalyserNode method
+    canvas = document.getElementById('analyser_render');
+    ctx = canvas.getContext('2d');
+    // Re-route audio playback into the processing graph of the AudioContext
+    source = context.createMediaElementSource(audio); 
+    source.connect(analyser);
+    analyser.connect(context.destination);
+    frameLooper();
+}
+// frameLooper() animates any style of graphics you wish to the audio frequency
+// Looping at the default frame rate that the browser provides(approx. 60 FPS)
+function frameLooper(){
+    window.webkitRequestAnimationFrame(frameLooper);
+    fbc_array = new Uint8Array(analyser.frequencyBinCount);
+    analyser.getByteFrequencyData(fbc_array);
+    ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+    ctx.fillStyle = '#00CCFF'; // Color of the bars
+    bars = 100;
+    for (var i = 0; i < bars; i++) {
+        bar_x = i * 3;
+        bar_width = 2;
+        bar_height = -(fbc_array[i] / 2);
+        //fillRect( x, y, width, height ) // Explanation of the parameters below
+        ctx.fillRect(bar_x, canvas.height, bar_width, bar_height);
+    }
+}
+</script>
+
+
+
+
+          
+
+
+          <!--related feeds-->
+          <div class="col-md-5"><%= image_tag "related.png" %></div>
+        </div>
+      <br>
+          <% @songs.each do |song| %>
+                <%= link_to 'New Song', new_song_path %>
+                <%= link_to 'Edit', edit_song_path(song) %> |
+                <%= link_to 'Destroy', song, method: :delete, data: { confirm: 'Are you sure?' } %>|
+                <%= link_to 'Back', songs_path %>
+
+
+          <% end %>
+      </div>
+</div>
+
+
+
+
+
+
+</body>
+
+
+
+    <footer>
+          <div class="player-wrap pindown centerfy">
+            
+<div class = "downanalyser" >
+
+            <div id="mp3_player">
+              
+    <div id ="solo_render"></div>
+    <div id="audio_box"></div>
+  
+  
+  <canvas id="analyser_render"></canvas>
+
+</div>
+            
+          </div> 
+
+          </div>  
+    </footer>
+
+</html>
+

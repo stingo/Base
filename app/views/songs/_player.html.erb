@@ -1,22 +1,36 @@
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<link rel="stylesheet" type="text/css" href="style/styles.css">
+
+
+<style>
+body{ background:#666; }
+button{ border:none; cursor:pointer; outline:none; }
+button#playpausebtn{
+    background:url(images/play.png) no-repeat;
+    width:58px;
+    height:56px;
+}
+</style>
+
+
+
 <script>
 var audio, playbtn;
 function initAudioPlayer(){
-   
-
     audio = new Audio();
-
     <% @songs.each do |song| %>
     
     audio.src = '<%= song.audio.url %>';
 
     <% end %>
-
-    
-
     audio.controls = true;
-    
-
-   
     audio.loop = true;
     audio.pause();
 
@@ -31,14 +45,29 @@ function initAudioPlayer(){
     function playPause(){
         if(audio.paused){
             audio.play();
-            playbtn.style.background = "url(images/player/pause.png) no-repeat";
+            playbtn.style.background = "url(images/pause.png) no-repeat";
         } else {
             audio.pause();
-            playbtn.style.background = "url(images/player/play.png) no-repeat";
+            playbtn.style.background = "url(images/play.png) no-repeat";
         }
     }
     
 }
 window.addEventListener("load", initAudioPlayer);
-
 </script>
+
+
+
+
+
+</head>
+<body>
+<button id="playpausebtn"></button>
+
+
+
+   
+</div>
+
+</body>
+</html>

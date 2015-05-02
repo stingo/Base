@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+#mylist{ font-size:20px; width:250px; padding:5px; }
+
+
+body{ background:#666; }
+button{ border:none; cursor:pointer; outline:none; }
+
+
+
+</style>
+<script>
+function initAudioPlayer(){
+    var audio, mylist, playbtn;
+   
+    
+     
+    ext = ".mp3";
+    // Audio Object
+    audio = new Audio();
+
+     <% @songs.each do |song| %>
+    
+    audio.src = '<%= song.audio.url %>';
+
+    <% end %>
+   
+    audio.pause();
+    
+
+    // Event Handling
+    mylist = document.getElementById("mylist");
+    mylist.addEventListener("change", changeTrack);
+    // Functions
+    function changeTrack(event){
+         <% @songs.each do |song| %>
+        audio.src = '<%= song.audio.url %>'+event.target.value;
+        <% end %>
+        audio.play();
+    }
+}
+window.addEventListener("load", initAudioPlayer);
+</script>
+
+
+</head>
+<body>
+<select id="mylist" size="4">
+    <% @songs.each do |song| %>
+    <option value="<%= song.audio.url %>">Stoker</option>
+      <% end %>
+  <option value="Break Every Chain">Break Every Chain</option>
+  <option value="Tell The World">Tell The World</option>
+</select>
+
+</body>
+</html>

@@ -4,90 +4,103 @@
 <title>African Music Base</title>
 <!--audio css-->
 
-<style type="text/css">
-
-
+<!--style>
+body{ background:#666; }
 button{ border:none; cursor:pointer; outline:none; }
 button#playpausebtn{
-  background:url(images/play.png) no-repeat;
-  width:58px;
-  height:56px;
-}
-button#mutebtn{
-  background:url(images/speaker.png) no-repeat;
-  width:5px;
-  height:14px;
+    background:url(images/play.png) no-repeat;
+    width:58px;
+    height:56px;
 }
 
-<!-- analyzer -->
-
-div#mp3_player{ width:500px; height:10px; background:#000; padding:5px; margin:0px auto; position: fixed;
-left: 0; bottom: 0; }
-div#mp3_player > div > audio{  width:500px; background:#f8f8f8; float:left;  }
-div#mp3_player > canvas{ width:500px; height:30px; background:#f8f8f8; float:left; }
-div#mp3_player > div > solo{ width:500px; height:0px; background:#000000; float:left; }
 
 
+#mylist{ font-size:20px; width:250px; padding:5px; }
 
 
-</style>
+body{ background:#666; }
+button{ border:none; cursor:pointer; outline:none; }
+</style-->
 
 
 <!-- add styles and scripts -->
-    <%= javascript_include_tag :all %>
-    <link href="css/styles.css" rel="stylesheet" type="text/css" />
-    <%= javascript_include_tag 'inplayer', 'data-turbolinks-track' => true %>
-    <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
-    <script type="text/javascript" src="js/jquery-ui-1.8.21.custom.min.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
 
-    <%= stylesheet_link_tag "playerstyles", media: "all" %>
-    <%= javascript_include_tag "sub/main", "jquery-1.7.2.min", "jquery-ui-1.8.21.custom.min" %>
+     
+
+    
+
 
 
 </head>
 
 <body>
 
-  <div class="jumbotron centerfy">
-  <h1>African Music Base</h1>
-  <p>Free, easy and fun way to Share or promote African Music, Videos & Events..</p>
   
-  <p><%= link_to "Get Started", new_user_registration_path, class: "btn btn-primary btn-lg" %> </p>
+
+
+<!--div id="container">
+  <div id="audio-image">
+    <img class="cover" />
+  </div>
+  <div id="audio-player">
+    <div id="audio-info">
+      <span class="artist"></span> - <span class="title"></span>
+    </div>
+     <input id="volume" type="range" min="0" max="10" value="5" />
+     <br>
+     <div id="buttons">
+     <span>
+      <button id="prev"></button>
+      <button id="play"></button>
+      <button id="pause"></button>
+      <button id="stop"></button>
+      <button id="next"></button>
+      <div id="tracker">
+      <div id="progressBar">
+        <span id="progress"></span>
+      </div>
+      <span id="duration"></span>
+      </span>
+     </div>
+     <div class="clearfix"></div>
+     
+     </div>
+     <div class="clearfix"></div>
+     
+
+     <ul id="playlist" class="hidden">
+
+      
+
+           
+      
+    </ul>
+  </div>
+
+</div-->
+ 
+
+
+<!--%= render baseplayer %-->
+
+
+
+
+
+</div>  
+ 
+
+
 </div>
 <br>
 
 
 
-<!--<div class="example">
 
-        <div class="player">
-            <div class="pl"></div>
-            <div class="title"></div>
-            <div class="artist"></div>
-            <div class="cover"></div>
-            <div class="controls">
-                <div class="play"></div>
-                <div class="pause"></div>
-                <div class="rew"></div>
-                <div class="fwd"></div>
-            </div>
-            <div class="volume"></div>
-            <div class="tracker"></div>
-        </div>
-        <% @songs.each do |song| %>
-              <ul class="playlist hidden">
-                  <li audiourl="01.mp3" cover="cover1.jpg" artist="Artist 1">01.mp3</li>
-                  <li audiourl="02.mp3" cover="cover2.jpg" artist="Artist 2">02.mp3</li>
-                  <li audiourl="03.mp3" cover="cover3.jpg" artist="Artist 3">03.mp3</li>
-                  <li audiourl="04.mp3" cover="cover4.jpg" artist="Artist 4">04.mp3</li>
-                  <li audiourl="05.mp3" cover="cover5.jpg" artist="Artist 5">05.mp3</li>
-                  <li audiourl="06.mp3" cover="cover6.jpg" artist="Artist 6">06.mp3</li>
-                  <li audiourl="07.mp3" cover="cover7.jpg" artist="Artist 7">07.mp3</li>
-              </ul>
-        <% end %>
 
-    </div>-->
+
+
+
 
 
 
@@ -104,10 +117,10 @@ div#mp3_player > div > solo{ width:500px; height:0px; background:#000000; float:
 
             <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped table-hover ">
 
-              <% @songs.reverse_each do |song| %>
+              
 
-    
-    <tr >
+              <% @songs.reverse_each do |song| %>
+      <tr >
      
       <td>
 
@@ -117,7 +130,6 @@ div#mp3_player > div > solo{ width:500px; height:0px; background:#000000; float:
 
                       <% else %>
                         <%= image_tag("fallback/noimage.jpg") %>
-
                         
                         <% end %>
 
@@ -125,26 +137,155 @@ div#mp3_player > div > solo{ width:500px; height:0px; background:#000000; float:
         </td>
       
 
-      <td align="left">
-
-        
-              
-          
-       <div class="centerplayer">
-<button id="playpausebtn"></button>
-</div>
-
-
-
-
-          
-
+     
+     
+         <td align="left">
  
-          
-          <!---<input type= "button" value= "Count" id= "countButton" />
-          <p>yes<span id= "displayCount">0</span>plays. </p>
-          <button type="button" class="btn btn-info btn-xs">23,779</button>-->              
+     <div   class="buttons">
+     <span>
+      
+      <button id="play"></button>
+      <button id="pause"></button>
+    </span>
+     
+     <ul id="playlist" class="hidden">
+     <li song='<%= song.audio.url if song.audio %>' cover="cover1.jpg" artist="Lacrae ft. Mali Music">Tell The Worl.mp3</li>    
+   
+    </ul>
+      
+
+      
+      </div> 
+      
+ 
+        <script>
+
+var audio;
+
+//Hide Pause Initially
+$('#pause').hide();
+$('#playlist').hide();
+ 
+//Initializer - Play First Song
+initAudio($('#playlist li'));
+  
+function initAudio(element){
+  var song = element.attr('song');
+    var title = element.text();
+    var cover = element.attr('cover');
+    var artist = element.attr('artist');
+
+  //Create a New Audio Object
+  audio = new Audio(song);
+  
+  if(!audio.currentTime){
+    $('#duration').html('0.00');
+  }
+
+  $('#audio-player .title').text(title);
+    $('#audio-player .artist').text(artist);
+  
+  //Insert Cover Image
+  $('img.cover').attr('src','images/covers/' + cover);
+  
+  $('#playlist li').removeClass('active');
+    element.addClass('active');
+}
+
+
+//Play Button
+$('#play').click(function(){
+  audio.play();
+  $('#play').hide();
+  $('#pause').show();
+  $('#duration').fadeIn(400);
+  showDuration();
+});
+
+//Pause Button
+$('#pause').click(function(){
+  audio.pause();
+  $('#pause').hide();
+  $('#play').show();
+});
+  
+//Stop Button
+$('#stop').click(function(){
+  audio.pause();    
+  audio.currentTime = 0;
+  $('#pause').hide();
+  $('#play').show();
+  $('#duration').fadeOut(400);
+});
+
+//Next Button
+$('#next').click(function(){
+    audio.pause();
+    var next = $('#playlist li.active').next();
+    if (next.length == 0) {
+        next = $('#playlist li:first-child');
+    }
+    initAudio(next);
+  audio.play();
+  showDuration();
+});
+
+//Prev Button
+$('#prev').click(function(){
+    audio.pause();
+    var prev = $('#playlist li.active').prev();
+    if (prev.length == 0) {
+        prev = $('#playlist li:last-child');
+    }
+    initAudio(prev);
+  audio.play();
+  showDuration();
+});
+
+//Playlist Song Click
+
+$('#playlist').click(function () {
+    audio.pause();
+    initAudio($(this));
+  $('#play').hide();
+  $('#pause').show();
+  $('#duration').fadeIn(400);
+  audio.play();
+  showDuration();
+}); 
+
+//Volume Control
+$('#volume').change(function(){
+  audio.volume = parseFloat(this.value / 10);
+});
+  
+//Time Duration
+function showDuration(){
+  $(audio).bind('timeupdate', function(){
+    //Get hours and minutes
+    var s = parseInt(audio.currentTime % 60);
+    var m = parseInt((audio.currentTime / 60) % 60);
+    //Add 0 if seconds less than 10
+    if (s < 10) {
+      s = '0' + s;
+    }
+    $('#duration').html(m + '.' + s); 
+    var value = 0;
+    if (audio.currentTime > 0) {
+      value = Math.floor((100 / audio.duration) * audio.currentTime);
+    }
+    $('#progress').css('width',value+'%');
+  });
+}
+
+
+</script>          
+                     
         </td>
+     
+
+
+
      
       <td class="" align="left" >     
        <%= link_to song.title, song %>
@@ -169,60 +310,7 @@ div#mp3_player > div > solo{ width:500px; height:0px; background:#000000; float:
   </table>
 </div>
 
-  
-<!--script for individual player starts here-->
 
-
-        <%= render 'player' %>
-
- <!--script for analyzer starts here-->
-
-<script>
-// Create a new instance of an audio object and adjust some of its properties
-var audio = new Audio();
-audio.src = '';
-
-audio.loop = true;
-audio.autoplay = false;
-
-// Establish all variables that your Analyser will use
-var canvas, solo, ctx, source, context, analyser, fbc_array, bars, bar_x, bar_width, bar_height;
-// Initialize the MP3 player after the page loads all of its HTML into the window
-window.addEventListener("load", initMp3Player, false);
-function initMp3Player(){
-    document.getElementById('audio_box').appendChild(audio);
-    context = new webkitAudioContext(); // AudioContext object instance
-    solo = document.getElementById('solo_render');
-    analyser = context.createAnalyser(); // AnalyserNode method
-    canvas = document.getElementById('analyser_render');
-    ctx = canvas.getContext('2d');
-    // Re-route audio playback into the processing graph of the AudioContext
-    source = context.createMediaElementSource(audio); 
-    source.connect(analyser);
-    analyser.connect(context.destination);
-    frameLooper();
-}
-// frameLooper() animates any style of graphics you wish to the audio frequency
-// Looping at the default frame rate that the browser provides(approx. 60 FPS)
-function frameLooper(){
-    window.webkitRequestAnimationFrame(frameLooper);
-    fbc_array = new Uint8Array(analyser.frequencyBinCount);
-    analyser.getByteFrequencyData(fbc_array);
-    ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
-    ctx.fillStyle = '#00CCFF'; // Color of the bars
-    bars = 100;
-    for (var i = 0; i < bars; i++) {
-        bar_x = i * 3;
-        bar_width = 2;
-        bar_height = -(fbc_array[i] / 2);
-        //fillRect( x, y, width, height ) // Explanation of the parameters below
-        ctx.fillRect(bar_x, canvas.height, bar_width, bar_height);
-    }
-}
-</script>
-
-
-          
 
 
           <!--related feeds-->
@@ -254,15 +342,6 @@ function frameLooper(){
             
 <div class = "downanalyser" >
 
-            <div id="mp3_player">
-              
-    <div id ="solo_render"></div>
-    <div id="audio_box"></div>
-  
-  
-  <canvas id="analyser_render"></canvas>
-
-</div>
             
           </div> 
 
@@ -270,4 +349,5 @@ function frameLooper(){
     </footer>
 
 </html>
+
 

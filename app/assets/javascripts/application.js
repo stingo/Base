@@ -13,13 +13,20 @@
 //
 //= require jquery
 //= require rails-timeago
-//= require rails-timeago-all
+
 //= require bootstrap-sprockets
 //= require jquery_ujs
 
-//= require sub/jquery-1.7.2.min
-//= require sub/jquery-ui-1.8.21.custom.min
-//= require sub/main
-//= require inplayer
-//= require jquery.turbolinks
-//= require_tree .
+// require amazing/amazingaudioplayer
+// require amazing/initaudioplayer-1
+// require amazing/jquery
+// require sub/jquery-1.7.2.min
+// require sub/jquery-ui-1.8.21.custom.min
+// require sub/main
+
+
+// require jquery.turbolinks
+//= require player
+
+
+
